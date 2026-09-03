@@ -67,7 +67,7 @@ fn main() -> Result<(), eframe::Error> {
                 icon_data::from_png_bytes(&include_bytes!("../thermal-cat-logo-512px.png")[..])
                     .unwrap(),
             ),
-        renderer: eframe::Renderer::Wgpu,
+        renderer: (if cfg!(feature = "rpi") { eframe::Renderer::Glow } else { eframe::Renderer::Wgpu } ),
 
         ..Default::default()
     };
